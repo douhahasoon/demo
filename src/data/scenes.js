@@ -1,4 +1,8 @@
 import { BarChart3, FileCheck, Calculator, UserCheck } from 'lucide-react';
+import imgEvaluation from '../assets/takeem.jpg';
+import imgCommittees from '../assets/lajnah.jpg';
+import imgFinance from '../assets/ihtisap.jpg';
+import imgPoints from '../assets/4.jpg';
 
 // مشاهد السيناريو (٢–٥). المشهد ١ = الإطلاق، ٦ = التحويل والإيداع (سردي)، ثم شاشة النهاية.
 // استبدل image لاحقاً بسكرين‌شوت حقيقي لكل شاشة.
@@ -14,6 +18,7 @@ export const scenes = [
     accent: 'blue',
     variant: 'chart',
     image: null,
+    systemImg: imgEvaluation,
   },
   {
     id: 'committees',
@@ -26,6 +31,7 @@ export const scenes = [
     accent: 'emerald',
     variant: 'docs',
     image: null,
+    systemImg: imgCommittees,
   },
   {
     id: 'finance',
@@ -38,6 +44,7 @@ export const scenes = [
     accent: 'amber',
     variant: 'finance',
     image: null,
+    systemImg: imgFinance,
   },
   {
     id: 'points',
@@ -50,6 +57,7 @@ export const scenes = [
     accent: 'purple',
     variant: 'counter',
     image: null,
+    systemImg: imgPoints,
   },
 ];
 

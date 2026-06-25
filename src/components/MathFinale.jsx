@@ -186,7 +186,7 @@ export default function MathFinale() {
       </div>
 
       {/* ===== المرحلة (ج): النص + الموبايل + الخاتمة ===== */}
-      <div className="mf-promo absolute right-[4%] w-[36%] flex flex-col gap-4 text-right z-30" style={{ direction: 'rtl', top: '50%', transform: 'translateY(-50%)' }}>
+      <div className="mf-promo absolute left-[5%] w-[36%] flex flex-col gap-4 text-right z-30" style={{ direction: 'rtl', top: '50%', transform: 'translateY(-50%)' }}>
         <h2 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-l from-slate-800 to-blue-700 leading-tight">إشعار فوري بحوافزك</h2>
         <p className="text-lg text-slate-500 leading-relaxed">يصل الإشعار مباشرة إلى تطبيق الرواتب الخاص بك، لتعرف قيمة حوافزك المستحقة بكل شفافية وسرعة فور إيداعها.</p>
       </div>

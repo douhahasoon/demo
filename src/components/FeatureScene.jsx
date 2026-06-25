@@ -177,8 +177,26 @@ export default function FeatureScene({ scene, side, leaving, current, total }) {
 
       <div className="absolute inset-y-0 flex items-center" style={devSide}>
         <div style={{ transform: tilt, transformStyle: 'preserve-3d' }}>
-          <div className="feat-device-in">
-            <DeviceFrame scene={scene} />
+          <div className="feat-device-in relative">
+            {/* طبقة خلفية: صورة واجهة النظام الحقيقية */}
+            {scene.systemImg && (
+              <img
+                src={scene.systemImg}
+                alt=""
+                className="absolute w-[480px] rounded-xl border-4 border-white shadow-[0_35px_80px_rgba(15,23,42,0.35)] object-cover object-top pointer-events-none"
+                style={{
+                  top: '-150px',
+                  [side === 'right' ? 'right' : 'left']: '-185px',
+                  transform: `rotate(${side === 'right' ? 6 : -6}deg)`,
+                  zIndex: 0,
+                  opacity: 1,
+                }}
+              />
+            )}
+            {/* الشاشة الأمامية: الموكاب الحالي */}
+            <div className="relative z-10">
+              <DeviceFrame scene={scene} />
+            </div>
           </div>
         </div>
       </div>
