@@ -42,14 +42,21 @@ export default function Presentation() {
         {mode === 'distribution' && <MathFinale />}
       </div>
 
-      {/* مؤشّر التقدّم */}
+      {/* مؤشّر التقدّم — قابل للنقر للانتقال/الرجوع لأي خطوة */}
       {mode === 'features' && (
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 z-40">
+        <div className="absolute bottom-7 left-1/2 -translate-x-1/2 flex items-center gap-2 z-40">
           {scenes.map((s, i) => (
-            <span
+            <button
               key={s.id}
-              className={`scene-dot h-1.5 rounded-full ${i === index ? `w-8 ${ACCENTS[scenes[index].accent].chip}` : 'w-1.5 bg-slate-900/15'}`}
-            />
+              onClick={() => { setLeaving(false); setIndex(i); }}
+              className="group p-2 -m-1 cursor-pointer"
+              title={`${i + 1}. ${s.kicker}`}
+              aria-label={s.kicker}
+            >
+              <span
+                className={`block scene-dot h-1.5 rounded-full transition-all ${i === index ? `w-8 ${ACCENTS[scenes[index].accent].chip}` : 'w-2.5 bg-slate-900/15 group-hover:bg-slate-900/35'}`}
+              />
+            </button>
           ))}
         </div>
       )}

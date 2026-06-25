@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
-import { Banknote, Star, Stamp, Calculator } from 'lucide-react';
+import { Banknote, Star, Stamp, Calculator, Layers } from 'lucide-react';
 import { Player } from '@lottiefiles/react-lottie-player';
 import appImg from '../assets/salary-app.png';
 import confettiAnim from '../assets/confetti.json';
@@ -11,13 +11,14 @@ import Copyright from './Copyright';
 const SFX = 'https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3';
 
 // المحرّك الرياضي الحقيقي
-const REVENUE = 1_500_000_000;          // صافي الإيراد
+const REVENUE = 2_000_000_000;          // صافي الإيراد
 const TOTAL_POINTS = 9000 * 50;         // 9000 موظف × 50 نقطة = 450,000
-const POINT_PRICE = REVENUE / TOTAL_POINTS; // = 3,333.33 د.ع
-const EMP_EVAL_PTS = 40;                 // ورقة التقييم 8/10
-const EMP_COMM_PTS = 10;                 // ورقة اللجان (2 لجنة)
-const EMP_POINTS = EMP_EVAL_PTS + EMP_COMM_PTS; // 50 نقطة
-const NET = EMP_POINTS * POINT_PRICE;    // = 166,667 د.ع
+const POINT_PRICE = REVENUE / TOTAL_POINTS; // = 4,444.44 د.ع
+const EMP_FIXED_PTS = 32;                // النقاط الثابتة
+const EMP_EVAL_PTS = 8;                   // ورقة التقييم (8 من 10)
+const EMP_COMM_PTS = 10;                  // ورقة اللجان (2 لجنة)
+const EMP_POINTS = EMP_FIXED_PTS + EMP_EVAL_PTS + EMP_COMM_PTS; // 50 نقطة
+const NET = EMP_POINTS * POINT_PRICE;    // = 222,222 د.ع
 
 const fmt = (n) => Math.round(n).toLocaleString('en-US');
 
@@ -74,19 +75,26 @@ export default function MathFinale() {
         .to('.mf-cryptor', { opacity: 1, duration: 0.01 })
         .to('.mf-card', { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: 'back.out(1.4)' })
 
-        // ورقة التقييم (8/10) — تطير من اليسار وتغطس
-        .fromTo('.mf-paper-1', { opacity: 0, x: -420, y: -150, rotate: -20, scale: 1.15 },
+        // ورقة النقاط الثابتة (32) — تطير من الأسفل
+        .fromTo('.mf-paper-0', { opacity: 0, x: -120, y: 320, rotate: -12, scale: 1.15 },
           { opacity: 1, x: 0, y: 0, rotate: 0, scale: 1, duration: 1.0, ease: 'power3.inOut' }, '+=0.2')
-        .to('.mf-paper-1', { y: 30, scale: 0.25, opacity: 0, duration: 0.55, ease: 'power2.in', onStart: () => animateNumber(setEmpPts, 0, EMP_EVAL_PTS, 1.6) })
-        .to('.mf-gauge-fill', { scaleX: EMP_EVAL_PTS / EMP_POINTS, duration: 1.6, ease: 'power1.inOut' }, '<')
-        .to({}, { duration: 0.5 })
+        .to('.mf-paper-0', { y: 30, scale: 0.25, opacity: 0, duration: 0.55, ease: 'power2.in', onStart: () => animateNumber(setEmpPts, 0, EMP_FIXED_PTS, 1.4) })
+        .to('.mf-gauge-fill', { scaleX: EMP_FIXED_PTS / EMP_POINTS, duration: 1.4, ease: 'power1.inOut' }, '<')
+        .to({}, { duration: 0.4 })
+
+        // ورقة التقييم (8 نقاط) — تطير من اليسار
+        .fromTo('.mf-paper-1', { opacity: 0, x: -420, y: -150, rotate: -20, scale: 1.15 },
+          { opacity: 1, x: 0, y: 0, rotate: 0, scale: 1, duration: 1.0, ease: 'power3.inOut' })
+        .to('.mf-paper-1', { y: 30, scale: 0.25, opacity: 0, duration: 0.55, ease: 'power2.in', onStart: () => animateNumber(setEmpPts, EMP_FIXED_PTS, EMP_FIXED_PTS + EMP_EVAL_PTS, 0.9) })
+        .to('.mf-gauge-fill', { scaleX: (EMP_FIXED_PTS + EMP_EVAL_PTS) / EMP_POINTS, duration: 0.9, ease: 'power1.inOut' }, '<')
+        .to({}, { duration: 0.4 })
 
         // ورقة اللجان (2 لجنة - 10 نقاط) — تطير من اليمين
         .fromTo('.mf-paper-2', { opacity: 0, x: 420, y: -130, rotate: 20, scale: 1.15 },
           { opacity: 1, x: 0, y: 0, rotate: 0, scale: 1, duration: 1.0, ease: 'power3.inOut' })
-        .to('.mf-paper-2', { y: 30, scale: 0.25, opacity: 0, duration: 0.55, ease: 'power2.in', onStart: () => animateNumber(setEmpPts, EMP_EVAL_PTS, EMP_POINTS, 0.9) })
+        .to('.mf-paper-2', { y: 30, scale: 0.25, opacity: 0, duration: 0.55, ease: 'power2.in', onStart: () => animateNumber(setEmpPts, EMP_FIXED_PTS + EMP_EVAL_PTS, EMP_POINTS, 0.9) })
         .to('.mf-gauge-fill', { scaleX: 1, duration: 0.9, ease: 'power1.inOut' }, '<')
-        .to({}, { duration: 0.5 })
+        .to({}, { duration: 0.4 })
 
         // ورقة سعر النقطة — تطير من الأعلى وتُكمل الحساب
         .fromTo('.mf-paper-3', { opacity: 0, y: -300, rotate: 0, scale: 1.15 },
@@ -155,10 +163,25 @@ export default function MathFinale() {
             </div>
           </div>
 
-          {/* النقاط + المؤشّر */}
+          {/* تفصيل النقاط + المؤشّر */}
           <div className="bg-slate-50 rounded-2xl p-4 border border-slate-200 mb-3">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-slate-600 text-sm">النقاط المعتمدة</span>
+            <div className="flex flex-col gap-2 mb-3 text-sm">
+              <div className="flex justify-between items-center">
+                <span className="text-slate-600">النقاط الثابتة</span>
+                <span className="font-black text-slate-700 font-mono">{Math.round(Math.min(empPts, EMP_FIXED_PTS))}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-slate-600">التقييم (٨ / ١٠)</span>
+                <span className="font-black text-blue-600 font-mono">{Math.round(Math.max(0, Math.min(empPts - EMP_FIXED_PTS, EMP_EVAL_PTS)))}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-slate-600">إنجازات اللجان (٢ لجنة)</span>
+                <span className="font-black text-amber-600 font-mono">{Math.round(Math.max(0, Math.min(empPts - EMP_FIXED_PTS - EMP_EVAL_PTS, EMP_COMM_PTS)))}</span>
+              </div>
+            </div>
+
+            <div className="flex justify-between items-center mb-2 pt-2 border-t border-slate-200">
+              <span className="text-slate-800 text-sm font-bold">الإجمالي</span>
               <span className="text-2xl font-black text-slate-800 font-mono">{Math.round(empPts)}<span className="text-sm text-slate-400"> / {EMP_POINTS}</span></span>
             </div>
             <div className="h-2.5 w-full bg-slate-200 rounded-full overflow-hidden">
@@ -180,7 +203,8 @@ export default function MathFinale() {
         </div>
 
         {/* الأوراق الزجاجية */}
-        <Paper cls="mf-paper-1" icon={Star} title="ورقة التقييم" main="٨ / ١٠" sub="+40 نقطة" accent="text-blue-600" />
+        <Paper cls="mf-paper-0" icon={Layers} title="النقاط الثابتة" main="٣٢" sub="نقطة ثابتة" accent="text-slate-600" />
+        <Paper cls="mf-paper-1" icon={Star} title="ورقة التقييم" main="٨ / ١٠" sub="+8 نقاط" accent="text-blue-600" />
         <Paper cls="mf-paper-2" icon={Stamp} title="إنجازات اللجان" main="٢ لجنة" sub="+10 نقاط" accent="text-amber-600" />
         <Paper cls="mf-paper-3" icon={Banknote} title="سعر النقطة" main={`${fmt(POINT_PRICE)}`} sub="د.ع لكل نقطة" accent="text-emerald-600" />
       </div>

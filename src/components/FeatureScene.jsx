@@ -74,12 +74,12 @@ function PlaceholderUI({ scene }) {
         {Header}
         <div className={`rounded-xl ${a.soft} border p-3`}>
           <p className="text-[11px] text-slate-500 mb-1">صافي الإيراد الشهري</p>
-          <p className="text-2xl font-black text-slate-800 font-mono">١٢٥٠٠٠٠٠٠ <span className="text-sm">د.ع</span></p>
+          <p className="text-2xl font-black text-slate-800 font-mono">2,000,000,000 <span className="text-sm">د.ع</span></p>
         </div>
         <div className="flex items-center justify-center text-slate-400 text-xs">↓ احتساب آلي ↓</div>
         <div className="flex-1 rounded-xl bg-white border border-slate-200 p-3 flex flex-col items-center justify-center">
           <p className="text-[11px] text-slate-500">قيمة النقطة</p>
-          <p className={`text-3xl font-black ${a.text} font-mono`}>٨٣٣٣ <span className="text-sm">د.ع</span></p>
+          <p className={`text-3xl font-black ${a.text} font-mono`}>4,444 <span className="text-sm">د.ع</span></p>
         </div>
       </div>
     );
