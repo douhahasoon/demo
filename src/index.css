@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* منحنيات Emil Kowalski القوية — أقوى من إيزنغ CSS الافتراضي */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);       /* دخول/خروج العناصر */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);   /* الحركة على الشاشة */
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);    /* انزلاق شبيه iOS */
+}
+
+body {
+  margin: 0;
+  background-color: #05070e;
+  overflow: hidden; /* لمنع السكرول العشوائي أثناء العرض */
+  color: white;
+  font-family: 'Cairo', system-ui, sans-serif;
+}
+
+/* ردّ فعل ضغط لأي عنصر قابل للضغط — يجعل الواجهة تستجيب فوراً */
+.btn-press { transition: transform 150ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .btn-press:hover { transform: translateY(-1px); }
+}
+.btn-press:active { transform: scale(0.97); }
+
+/* فلاتر وتأثيرات زجاجية */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.perspective-container {
+  perspective: 2000px;
+  transform-style: preserve-3d;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* حركات دخول بالـ CSS — مضمونة الظهور (لا تعتمد على rAF) */
+@keyframes heroReveal {
+  from { opacity: 0; transform: translateY(110%); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+.a-reveal { animation: heroReveal 0.9s var(--ease-out) both; }
+.a-fadeup { animation: fadeUp 0.7s var(--ease-out) both; }
+.a-pop { animation: popIn 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.25) both; }
+
+/* شريط التقدّم — transform بدل width (يعمل على GPU بلا layout) */
+@keyframes announceFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.announce-bar { transform-origin: left; animation: announceFill 2.3s var(--ease-out) forwards; }
+
+/* ===== خلفية matte glass — حركة الكتل اللونية ===== */
+@keyframes blobA { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(60px,40px) scale(1.12); } }
+@keyframes blobB { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-50px,30px) scale(1.1); } }
+@keyframes blobC { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(40px,-40px) scale(1.15); } }
+.blob-a { animation: blobA 16s ease-in-out infinite; }
+.blob-b { animation: blobB 20s ease-in-out infinite; }
+.blob-c { animation: blobC 18s ease-in-out infinite; }
+
+/* لوح زجاجي مطفي */
+.glass {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* ===== مشاهد الميزات ===== */
+@keyframes deviceIn { from { opacity: 0; transform: translateY(70px) scale(0.92); } to { opacity: 1; transform: none; } }
+.feat-device-in { animation: deviceIn 0.95s var(--ease-out) both; }
+
+.feat-scene { animation: fadeUp 0.55s var(--ease-out) both; }
+.feat-scene[data-leaving='true'] {
+  animation: none;
+  opacity: 0;
+  transform: translateY(-28px) scale(0.985);
+  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+}
+.feat-kicker { animation: fadeUp 0.6s var(--ease-out) both; animation-delay: 0.15s; }
+.feat-title-line { animation: heroReveal 0.8s var(--ease-out) both; animation-delay: 0.28s; }
+.feat-desc { animation: fadeUp 0.7s var(--ease-out) both; animation-delay: 0.45s; }
+.feat-bullet { animation: fadeUp 0.6s var(--ease-out) both; }
+
+/* مؤشّر التقدّم */
+.scene-dot { transition: width 0.4s var(--ease-out), background-color 0.4s var(--ease-out); }
+
+/* نمو الأعمدة/الصفوف داخل شاشات الـ placeholder */
+@keyframes barGrow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+.bar-grow { transform-origin: bottom; animation: barGrow 0.7s var(--ease-out) both; }
+@keyframes rowIn { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
+.row-in { animation: rowIn 0.5s var(--ease-out) both; }
+
+/* المشهد الأول: وميض ومؤشّر الإطلاق */
+@keyframes launchRipple { from { transform: translate(-50%,-50%) scale(0); opacity: 0.7; } to { transform: translate(-50%,-50%) scale(50); opacity: 0; } }
+.launch-ripple { animation: launchRipple 0.7s var(--ease-out) forwards; }
+@keyframes launchFlash { 0% { opacity: 0; } 35% { opacity: 0.85; } 100% { opacity: 0; } }
+.launch-flash { animation: launchFlash 0.7s ease-out forwards; }
+@keyframes cursorTap { 0%, 100% { transform: translate(0,0) scale(1); } 40% { transform: translate(-6px,-6px) scale(1); } 55% { transform: translate(-6px,-6px) scale(0.82); } 70% { transform: translate(-6px,-6px) scale(1); } }
+.launch-cursor { animation: cursorTap 2.4s ease-in-out infinite; }
+
+/* احترام تفضيل تقليل الحركة — نبقي الشفافية ونلغي الحركة المكانية */
+@media (prefers-reduced-motion: reduce) {
+  .a-reveal, .a-fadeup, .a-pop {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+  }
+  .a-reveal { transform: none !important; }
+  .announce-bar { animation-duration: 0.6s; }
+  .btn-press:hover, .btn-press:active { transform: none; }
+  .feat-device-in, .feat-scene, .feat-kicker, .feat-title-line, .feat-desc, .feat-bullet {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+  }
+}
