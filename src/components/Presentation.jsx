@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { scenes, ACCENTS } from '../data/scenes';
 import FeatureScene from './FeatureScene';
-import DistributionScene from './DistributionScene';
+import MathFinale from './MathFinale';
 
 const SCENE_HOLD = 5000; // مدة بقاء كل مشهد ميزة (~8 ثوان مع الدخول/الخروج)
 const SCENE_EXIT = 600;
@@ -26,7 +26,7 @@ export default function Presentation() {
   const side = index % 2 === 0 ? 'right' : 'left';
 
   return (
-    <div className="absolute inset-0 perspective-container flex items-center justify-center bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/10 via-[#05070e] to-[#05070e] z-20">
+    <div className="absolute inset-0 perspective-container flex items-center justify-center bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-100/60 via-[#eef2f8] to-[#e2e8f2] z-20">
       <div className="w-[1100px] h-[600px] flex-shrink-0 preserve-3d relative flex items-center justify-center scale-[0.42] sm:scale-[0.55] md:scale-[0.7] lg:scale-90 xl:scale-100 transition-transform duration-500">
         {mode === 'features' && (
           <FeatureScene
@@ -39,7 +39,7 @@ export default function Presentation() {
           />
         )}
 
-        {mode === 'distribution' && <DistributionScene />}
+        {mode === 'distribution' && <MathFinale />}
       </div>
 
       {/* مؤشّر التقدّم */}
@@ -48,7 +48,7 @@ export default function Presentation() {
           {scenes.map((s, i) => (
             <span
               key={s.id}
-              className={`scene-dot h-1.5 rounded-full ${i === index ? `w-8 ${ACCENTS[scenes[index].accent].chip}` : 'w-1.5 bg-white/25'}`}
+              className={`scene-dot h-1.5 rounded-full ${i === index ? `w-8 ${ACCENTS[scenes[index].accent].chip}` : 'w-1.5 bg-slate-900/15'}`}
             />
           ))}
         </div>

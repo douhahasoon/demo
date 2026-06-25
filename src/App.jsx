@@ -8,7 +8,7 @@ export default function App() {
   const [stage, setStage] = useState('preloader'); // preloader | hero | presentation
 
   return (
-    <div className="w-full h-screen relative flex items-center justify-center font-sans bg-[#05070e] overflow-hidden text-gray-800">
+    <div className="w-full h-screen relative flex items-center justify-center font-sans bg-[#eef2f8] overflow-hidden text-slate-800">
       {/* خلفية matte glass خلال شاشتي التحميل والترحيب */}
       {(stage === 'preloader' || stage === 'hero') && <GlassBackground />}
 

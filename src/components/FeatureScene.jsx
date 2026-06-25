@@ -8,7 +8,7 @@ function CountUp({ to, accentText }) {
   const [v, setV] = useState(0);
   useEffect(() => {
     const o = { n: 0 };
-    const tw = gsap.to(o, { n: to, duration: 1.8, delay: 0.5, ease: 'power2.out', onUpdate: () => setV(Math.floor(o.n)) });
+    const tw = gsap.to(o, { n: to, duration: 3.4, delay: 0.7, ease: 'power1.out', onUpdate: () => setV(Math.floor(o.n)) });
     return () => tw.kill();
   }, [to]);
   return <span className={`font-mono font-black ${accentText}`}>{v}</span>;
@@ -41,7 +41,7 @@ function PlaceholderUI({ scene }) {
         </div>
         <div className="flex-1 rounded-xl bg-white border border-slate-200 p-3 flex items-end gap-1.5">
           {[45, 70, 55, 85, 65, 95, 75].map((h, i) => (
-            <div key={i} className={`bar-grow flex-1 ${a.barSolid} rounded-t`} style={{ height: `${h}%`, animationDelay: `${i * 0.08}s` }} />
+            <div key={i} className={`bar-grow flex-1 ${a.barSolid} rounded-t`} style={{ height: `${h}%`, animationDelay: `${0.3 + i * 0.2}s` }} />
           ))}
         </div>
       </div>
@@ -116,20 +116,20 @@ function DeviceFrame({ scene }) {
     : <PlaceholderUI scene={scene} />;
 
   return (
-    <div className="relative w-[580px] rounded-2xl glass p-2.5 shadow-[0_50px_110px_rgba(0,0,0,0.65)]">
-      <div className={`absolute -inset-12 ${a.bar} blur-[80px] rounded-full -z-10 opacity-50`} />
+    <div className="relative w-[580px] rounded-2xl glass p-2.5 shadow-[0_40px_90px_rgba(15,23,42,0.18)]">
+      <div className={`absolute -inset-12 ${a.bar} blur-[80px] rounded-full -z-10 opacity-40`} />
       <div className="flex items-center gap-2 px-2 py-2">
         <div className="flex gap-1.5">
           <div className="w-3 h-3 rounded-full bg-red-400/90" />
           <div className="w-3 h-3 rounded-full bg-yellow-400/90" />
           <div className="w-3 h-3 rounded-full bg-green-400/90" />
         </div>
-        <div className="flex-1 mx-3 h-7 rounded-full bg-white/10 border border-white/10 flex items-center justify-center gap-2">
-          <svg viewBox="0 0 24 24" className="w-3 h-3 text-white/50" fill="none" stroke="currentColor" strokeWidth="2"><rect x="5" y="11" width="14" height="9" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>
-          <span className="text-[11px] text-white/55 tracking-wide" dir="ltr">hawafiz.itpc.gov.iq</span>
+        <div className="flex-1 mx-3 h-7 rounded-full bg-slate-900/5 border border-slate-900/10 flex items-center justify-center gap-2">
+          <svg viewBox="0 0 24 24" className="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" strokeWidth="2"><rect x="5" y="11" width="14" height="9" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>
+          <span className="text-[11px] text-slate-500 tracking-wide" dir="ltr">hawafiz.itpc.gov.iq</span>
         </div>
       </div>
-      <div className="relative w-full h-[330px] rounded-xl overflow-hidden border border-white/10">
+      <div className="relative w-full h-[330px] rounded-xl overflow-hidden border border-slate-900/10">
         <div className="absolute inset-0 z-20 pointer-events-none bg-[linear-gradient(120deg,_rgba(255,255,255,0.25)_0%,_transparent_32%)]" />
         {screen}
       </div>
@@ -150,23 +150,23 @@ export default function FeatureScene({ scene, side, leaving, current, total }) {
         <div className="feat-kicker flex items-center gap-2 ml-auto mr-0">
           <span className={`text-2xl font-black ${a.text} font-mono opacity-60`}>{scene.num}</span>
           <span className={`text-sm font-bold ${a.text} tracking-wide`}>{scene.kicker}</span>
-          <span className="text-xs text-gray-500 font-mono">{current} / {total}</span>
+          <span className="text-xs text-slate-400 font-mono">{current} / {total}</span>
         </div>
 
         <div className={`feat-kicker w-12 h-12 rounded-2xl ${a.ring} border flex items-center justify-center ml-auto mr-0`}>
           <Icon className={`w-6 h-6 ${a.text}`} />
         </div>
 
-        <h2 className="text-3xl md:text-[2.6rem] font-black text-white leading-tight overflow-hidden">
+        <h2 className="text-3xl md:text-[2.6rem] font-black text-slate-800 leading-tight overflow-hidden">
           <span className="feat-title-line inline-block">{scene.title}</span>
         </h2>
 
-        <p className="feat-desc text-base md:text-lg text-gray-400 leading-relaxed">{scene.desc}</p>
+        <p className="feat-desc text-base md:text-lg text-slate-500 leading-relaxed">{scene.desc}</p>
 
         <ul className="flex flex-col gap-2.5 mt-1">
           {scene.bullets.map((b, i) => (
             <li key={i} className="feat-bullet flex items-center gap-3 justify-end" style={{ animationDelay: `${0.55 + i * 0.07}s` }}>
-              <span className="text-gray-300">{b}</span>
+              <span className="text-slate-600">{b}</span>
               <span className={`w-5 h-5 rounded-full ${a.chip} flex items-center justify-center shrink-0`}>
                 <svg viewBox="0 0 24 24" className="w-3 h-3 text-white" fill="none" stroke="currentColor" strokeWidth="3"><path d="M20 6 9 17l-5-5" /></svg>
               </span>

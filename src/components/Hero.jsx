@@ -14,8 +14,8 @@ export default function Hero({ onStart }) {
   };
 
   return (
-    <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-white">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(5,7,14,0.4)_60%,_#05070e_100%)]" />
+    <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-slate-800">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(226,232,242,0.5)_60%,_#e2e8f2_100%)]" />
 
       {/* وميض الإطلاق */}
       {launching && <div className="launch-flash absolute inset-0 bg-white z-50 pointer-events-none" />}
@@ -26,13 +26,13 @@ export default function Hero({ onStart }) {
 
         <h1 className="text-3xl md:text-6xl font-black leading-[1.15] mb-4" style={{ direction: 'rtl' }}>
           <span className="block overflow-hidden py-1">
-            <span className="a-reveal inline-block bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400" style={{ animationDelay: '0.15s' }}>
+            <span className="a-reveal inline-block bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-blue-700" style={{ animationDelay: '0.15s' }}>
               نظام الحوافز الرقمي الجديد
             </span>
           </span>
         </h1>
 
-        <p className="a-fadeup text-gray-300 max-w-xl text-base md:text-lg mb-12" style={{ animationDelay: '0.5s', direction: 'rtl' }}>
+        <p className="a-fadeup text-slate-500 max-w-xl text-base md:text-lg mb-12" style={{ animationDelay: '0.5s', direction: 'rtl' }}>
           منصة رقمية متكاملة لإدارة الحوافز بكفاءة وشفافية
         </p>
 
@@ -49,7 +49,7 @@ export default function Hero({ onStart }) {
           </button>
 
           {!launching && (
-            <MousePointer2 className="launch-cursor absolute -bottom-2 left-8 w-7 h-7 text-white drop-shadow-lg" fill="white" />
+            <MousePointer2 className="launch-cursor absolute -bottom-2 left-8 w-7 h-7 text-slate-700 drop-shadow-lg" fill="white" />
           )}
         </div>
       </div>
