@@ -144,7 +144,7 @@ export default function DistributionScene() {
 
         <div className="dist-incentive absolute left-[26px] bottom-[15%] w-[228px] rounded-2xl bg-gradient-to-l from-emerald-100 to-emerald-50 border border-emerald-200 shadow-[0_30px_70px_rgba(16,185,129,0.45)] px-4 py-3 flex items-center gap-3 z-50" style={{ direction: 'rtl' }}>
           <div className="flex-1 text-right">
-            <div className="text-sm font-black text-emerald-900">الحوافز لهذا الشهر</div>
+            <div className="text-sm font-black text-emerald-900">مبارك ! حوافزك لهذا الشهر</div>
             <div className="text-xl font-black text-emerald-700 font-mono leading-tight">290,000 <span className="text-xs">د.ع</span></div>
             <div className="text-[10px] text-emerald-600/80 mt-0.5">2026/03/01</div>
           </div>
