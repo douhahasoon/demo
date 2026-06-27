@@ -55,7 +55,8 @@ export default function MathFinale() {
 
       const openApp = () => {
         setAppOpened(true);
-        gsap.to(notifRef.current, { y: -80, opacity: 0, scale: 0.8, duration: 0.5 });
+        // الإشعار ينزلق للأعلى-يمين ويبقى ظاهر (لا يختفي)
+        gsap.to(notifRef.current, { x: 25, y: -165, scale: 0.75, opacity: 1, duration: 0.8, ease: 'power3.inOut' });
         gsap.to(appScreenRef.current, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power4.out' });
       };
 
@@ -67,7 +68,7 @@ export default function MathFinale() {
         .to({}, { duration: 2.6 })
         .add(() => animateNumber(setPrice, 0, POINT_PRICE, 1.4, 'power2.out'))
         .to('.mf-eq-result', { scale: 1.12, duration: 0.4, yoyo: true, repeat: 1 }, '+=0.3')
-        .to({}, { duration: 1.2 })
+        .to({}, { duration: 3 }) // بقاء المعادلة أطول لقراءتها
         .to('.mf-equation-wrap', { opacity: 0, y: -40, duration: 0.7, ease: 'power2.in' })
 
       // ===== المرحلة (ب): كارت الموظف + تدفّق الأوراق =====
@@ -105,7 +106,7 @@ export default function MathFinale() {
         })
         .to('.mf-card', { boxShadow: '0 0 70px rgba(16,185,129,0.4)', duration: 0.4 })
         .to('.mf-net', { scale: 1.1, duration: 0.4, yoyo: true, repeat: 1 }, '<')
-        .to({}, { duration: 1.6 })
+        .to({}, { duration: 3.6 }) // بقاء كارت الموظف أطول لقراءة التفصيل والصافي
 
       // ===== المرحلة (ج): الموبايل + الإشعار + الخاتمة (كما هو) =====
         .to('.mf-cryptor', { opacity: 0, scale: 0.92, duration: 0.7, ease: 'power2.in' })
