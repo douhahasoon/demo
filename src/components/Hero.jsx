@@ -24,9 +24,9 @@ export default function Hero({ onStart }) {
         {/* الشعارات بدل أيقونة الشريحة */}
         <Logos size="lg" className="a-pop justify-center mb-10" style={{ animationDelay: '0.05s' }} />
 
-        <h1 className="text-3xl md:text-6xl font-black leading-[1.15] mb-4" style={{ direction: 'rtl' }}>
-          <span className="block overflow-hidden py-1">
-            <span className="a-reveal inline-block bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-blue-700" style={{ animationDelay: '0.15s' }}>
+        <h1 className="text-3xl md:text-6xl font-black leading-[1.4] mb-4" style={{ direction: 'rtl' }}>
+          <span className="block overflow-hidden py-3">
+            <span className="a-reveal inline-block leading-[1.4] bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-blue-700" style={{ animationDelay: '0.15s' }}>
               نظام الحوافز الرقمي الجديد
             </span>
           </span>

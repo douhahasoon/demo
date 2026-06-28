@@ -14,7 +14,7 @@ export default function App() {
 
       {stage === 'preloader' && <Preloader onDone={() => setStage('hero')} />}
       {stage === 'hero' && <Hero onStart={() => setStage('presentation')} />}
-      {stage === 'presentation' && <Presentation key="presentation" />}
+      {stage === 'presentation' && <Presentation key="presentation" onBackToHero={() => setStage('hero')} />}
     </div>
   );
 }

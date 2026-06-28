@@ -157,8 +157,8 @@ export default function FeatureScene({ scene, side, leaving, current, total }) {
           <Icon className={`w-6 h-6 ${a.text}`} />
         </div>
 
-        <h2 className="text-3xl md:text-[2.6rem] font-black text-slate-800 leading-tight overflow-hidden">
-          <span className="feat-title-line inline-block">{scene.title}</span>
+        <h2 className="text-3xl md:text-[2.6rem] font-black text-slate-800 leading-[1.35] overflow-hidden py-2">
+          <span className="feat-title-line inline-block leading-[1.35]">{scene.title}</span>
         </h2>
 
         <p className="feat-desc text-base md:text-lg text-slate-500 leading-relaxed">{scene.desc}</p>

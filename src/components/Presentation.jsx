@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ArrowRight } from 'lucide-react';
 import { scenes, ACCENTS } from '../data/scenes';
 import FeatureScene from './FeatureScene';
 import MathFinale from './MathFinale';
@@ -6,10 +7,18 @@ import MathFinale from './MathFinale';
 const SCENE_HOLD = 10000; // مدة بقاء كل مشهد ميزة (~8 ثوان مع الدخول/الخروج)
 const SCENE_EXIT = 600;
 
-export default function Presentation() {
+export default function Presentation({ onBackToHero }) {
   const [mode, setMode] = useState('features'); // features | distribution
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState(false);
+
+  // الرجوع خطوة واحدة للوراء في أي مشهد
+  const goBack = () => {
+    setLeaving(false);
+    if (mode === 'distribution') { setMode('features'); setIndex(scenes.length - 1); return; }
+    if (index > 0) { setIndex((i) => i - 1); return; }
+    onBackToHero?.(); // أول مشهد → رجوع لشاشة الإطلاق
+  };
 
   // مشاهد الميزات بالتتابع ثم مشهد التحويل (وهو الخاتمة)
   useEffect(() => {
@@ -27,6 +36,16 @@ export default function Presentation() {
 
   return (
     <div className="absolute inset-0 perspective-container flex items-center justify-center bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-100/60 via-[#eef2f8] to-[#e2e8f2] z-20">
+      {/* سهم الرجوع — صغير وفوق، يرجع خطوة في أي مشهد */}
+      <button
+        onClick={goBack}
+        className="btn-press absolute top-5 right-6 z-50 w-10 h-10 rounded-full glass flex items-center justify-center text-slate-600 hover:text-slate-900"
+        title="رجوع خطوة"
+        aria-label="رجوع خطوة"
+      >
+        <ArrowRight className="w-5 h-5" />
+      </button>
+
       <div className="w-[1100px] h-[600px] flex-shrink-0 preserve-3d relative flex items-center justify-center scale-[0.42] sm:scale-[0.55] md:scale-[0.7] lg:scale-90 xl:scale-100 transition-transform duration-500">
         {mode === 'features' && (
           <FeatureScene
