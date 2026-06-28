@@ -3,7 +3,7 @@ import { scenes, ACCENTS } from '../data/scenes';
 import FeatureScene from './FeatureScene';
 import MathFinale from './MathFinale';
 
-const SCENE_HOLD = 20000; // مدة بقاء كل مشهد ميزة (~8 ثوان مع الدخول/الخروج)
+const SCENE_HOLD = 10000; // مدة بقاء كل مشهد ميزة (~8 ثوان مع الدخول/الخروج)
 const SCENE_EXIT = 600;
 
 export default function Presentation() {
